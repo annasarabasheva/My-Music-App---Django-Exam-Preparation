@@ -7,6 +7,10 @@ from profiles.models import Profile
 
 def add_album(request):
     profile = Profile.objects.first()
+
+    if not profile:
+        return redirect('home')
+
     form = AlbumCreateForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
